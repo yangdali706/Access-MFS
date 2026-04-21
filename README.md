@@ -5,8 +5,8 @@ In the "Datasets" folder, we provide the dataset used in the experiments, langlo
 # Code of Access-MFS
 The code of the proposed Access-MFS can be found in the "Access-MFS" folder. Some explanations regarding the code are presented below:
 1. The file "Access-MFS" is the core part of our algorithm, which contains the details of the optimization.
-2. The file "ConstructSx" is used to compute the instance similarity matrix.
-3. The file "ConstructSf" is used to compute the label similarity matrix.
+2. The file "ConstructSx" is used to update the instance similarity matrix.
+3. The file "ConstructSf" is used to update the label similarity matrix.
 # ML-KNN
 In the "ML-KNN" folder, we provide the classification algorithm used in the experiments.
 # Demo
