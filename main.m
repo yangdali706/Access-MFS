@@ -1,6 +1,7 @@
 clc; clear;
 addpath('Access-MFS')
 addpath('Datasets')
+addpath('ML-KNN')
 
 % load data
 datamatrix = load('langlog.mat');
@@ -39,7 +40,7 @@ Y_te=Y(index_u,:);
 Y(index_u,:)=0;
 
 %Access-MFS 
-[selfea_ind,VALUE]= AccessMFS(X,Y,option);
+[selfea_ind,VALUE]= Access-MFS(X,Y,option);
 
 %classification experiment
 X_tr=X(:,index_l);
