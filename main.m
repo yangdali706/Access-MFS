@@ -8,15 +8,15 @@ X = datamatrix.data;
 Y = datamatrix.target;
 
 %normalize data
-min_val = min(X, [], 1);
-range = max(X, [], 1) - min_val;
-range(range == 0) = 1;   % 防止除0
-X = (X - min_val) ./ range;
+min_X = min(X, [], 1);
+max_min = max(X, [], 1) - min_X;
+max_min(max_min == 0) = 1;   
+X = (X - min_X) ./ max_min;
 X=X';
 Y(Y==-1)=0;
 Y=Y';
 
-%parameater setting
+% parameter setting
 option.lambda=1;
 option.theta=1;
 option.mu=1;
