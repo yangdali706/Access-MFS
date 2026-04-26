@@ -1,4 +1,4 @@
-function selfea_index= Access-MFS(X,Y,option)
+function selfea_index= Access_MFS(X,Y,option)
 %%
 num.Sample=size(X,2);
 num.Label=size(Y,2);
