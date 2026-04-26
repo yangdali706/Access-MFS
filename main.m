@@ -18,7 +18,7 @@ Y(Y==-1)=0;
 Y=Y';
 
 % parameter setting
-pararange=[1e-3, 1e-2,1e-1,1,10]
+pararange=[1e-3, 1e-2,1e-1,1,10];
 option.k_s=15;
 option.k_f=4;
 option.stopObj=1e-2;
