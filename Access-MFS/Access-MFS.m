@@ -1,4 +1,4 @@
-function [selfea_index,VALUE]= Access-MFS(X,Y,option)
+function selfea_index= Access-MFS(X,Y,option)
 %%
 num.Sample=size(X,2);
 num.Label=size(Y,2);
@@ -26,9 +26,8 @@ obj_valueopt=trace((H*X'*W-H*F)'*(H*X'*W-H*F))+option.lambda*trace(W'*D_w*W)...
     +option.theta*trace(W'*X*L_X*X'*W)+option.theta*alpha*sum(sum(S_X.*S_X))...
     +option.mu*trace(F*L_F*F')+option.mu*beta*sum(sum(S_F.*S_F));
 Error_obj=obj_valueopt-obj_value;
-VALUE=[];
-t=1;
-while abs(Error_obj)>option.stopObj && t<=option.maxiter
+
+while abs(Error_obj)>option.stopObj
 
     obj_value=obj_valueopt;
 
@@ -54,8 +53,6 @@ while abs(Error_obj)>option.stopObj && t<=option.maxiter
     +option.mu*trace(F*L_F*F')+option.mu*beta*sum(sum(S_F.*S_F));
     
     Error_obj=obj_valueopt-obj_value;
-    VALUE(t)=obj_valueopt;
-    t=t+1;
 end
 
 %Select features
