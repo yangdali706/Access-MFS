@@ -49,7 +49,7 @@ for lambda=pararange
                 Y(index_u,:)=0;
                 
                 %Access-MFS 
-                [selfea_ind,VALUE]= Access-MFS(X,Y,option);
+                selfea_ind= Access_MFS(X,Y,option);
                 
                 %classification experiment
                 X_tr=X(:,index_l);
