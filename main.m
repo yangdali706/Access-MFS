@@ -5,17 +5,17 @@ addpath('ML-KNN')
 
 % load data
 datamatrix = load('langlog.mat');
-X = datamatrix.data;
+X = datamatrix.data; 
 Y = datamatrix.target;
 
-%normalize data
+% normalize data
 min_X = min(X, [], 1);
 max_min = max(X, [], 1) - min_X;
 max_min(max_min == 0) = 1;   
-X = (X - min_X) ./ max_min;
-X=X';
-Y(Y==-1)=0;
-Y=Y';
+X = (X - min_X) ./ max_min; 
+X=X'; %d*n
+Y(Y==-1)=0; %0-1 label matrix
+Y=Y'; %n*c
 
 % parameter setting
 pararange=[1e-3, 1e-2,1e-1,1,10];
@@ -29,7 +29,7 @@ best_OE = 1;
 best_AP = 0;
 best_MaF = 0;
 
-%parameter tuning
+% parameter tuning
 for lambda=pararange
     option.lambda=lambda;
     for theta=pararange
@@ -37,7 +37,7 @@ for lambda=pararange
         for mu=pararange
             option.mu=mu;
             for t=1:5
-                %semi-supervised setting
+                % semi-supervised setting
                 number=fix(((1-m)*size(X,2)));
                 index_u=randperm(size(X,2),number);
                 index=1:1:size(X,2);
@@ -48,10 +48,10 @@ for lambda=pararange
                 Y_te=Y(index_u,:);
                 Y(index_u,:)=0;
                 
-                %Access-MFS 
-                selfea_ind= Access_MFS(X,Y,option);
+                % run Access-MFS and select features
+                selfea_ind= Access_MFS(X,Y,option); 
                 
-                %classification experiment
+                % perform ML-KNN classification experiment
                 X_tr=X(:,index_l);
                 X_te=X(:,index_u);
                 Y_tr=Y(index_l,:);
@@ -85,5 +85,5 @@ for lambda=pararange
     end
 end
 
-%display optimal results
+% display optimal results
 fprintf('RL = %.4f, OE = %.4f\n, AP = %.4f\n, MaF = %.4f\n', best_RL, best_OE, best_AP, best_MaF);
