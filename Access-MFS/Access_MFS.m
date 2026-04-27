@@ -14,17 +14,17 @@ for item=1:num.Sample
         U(item,item)=0; 
     end
 end
-%Initialize
+%Initialize variables
 F=Y; 
 W=rand(num.Feature,num.Label);
 D_w=eye(num.Feature);
 [S_X,L_X,alpha]=ConstructSx(W,X,F,num,option);
 [S_F,L_F,beta]=ConstructSf(F,num,option);
 obj_value=1;
-obj_valueopt=trace((H*X'*W-H*F)'*(H*X'*W-H*F))+option.lambda*trace(W'*D_w*W)...
+obj_valueopt=log(trace((H*X'*W-H*F)'*(H*X'*W-H*F))+option.lambda*trace(W'*D_w*W)...
     +trace((F-Y)'*U*(F-Y))+1/2*option.theta*trace(F'*L_X*F) ...
     +option.theta*trace(W'*X*L_X*X'*W)+option.theta*alpha*sum(sum(S_X.*S_X))...
-    +option.mu*trace(F*L_F*F')+option.mu*beta*sum(sum(S_F.*S_F));
+    +option.mu*trace(F*L_F*F')+option.mu*beta*sum(sum(S_F.*S_F)));
 Error_obj=obj_valueopt-obj_value;
 
 while abs(Error_obj)>option.stopObj
@@ -47,15 +47,15 @@ while abs(Error_obj)>option.stopObj
     [S_X,L_X,alpha]=ConstructSx(W,X,F,num,option);
     [S_F,L_F,beta]=ConstructSf(F,num,option);
     
-    obj_valueopt=trace((H*X'*W-H*F)'*(H*X'*W-H*F))+option.lambda*trace(W'*D_w*W)...
+    obj_valueopt=log(trace((H*X'*W-H*F)'*(H*X'*W-H*F))+option.lambda*trace(W'*D_w*W)...
     +trace((F-Y)'*U*(F-Y))+1/2*option.theta*trace(F'*L_X*F) ...
     +option.theta*trace(W'*X*L_X*X'*W)+option.theta*alpha*sum(sum(S_X.*S_X))...
-    +option.mu*trace(F*L_F*F')+option.mu*beta*sum(sum(S_F.*S_F));
+    +option.mu*trace(F*L_F*F')+option.mu*beta*sum(sum(S_F.*S_F)));
     
     Error_obj=obj_valueopt-obj_value;
 end
 
-%Select features
+%Select optimal features
 L2_norm=sum(W.*W,2);
 [~,Index]=sort(L2_norm,'descend');
 selfea_index=Index(1:option.sel_fea);
