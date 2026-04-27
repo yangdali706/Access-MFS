@@ -18,7 +18,7 @@ Y(Y==-1)=0; %0-1 label matrix
 Y=Y'; %n*c
 
 % parameter setting
-pararange=[1e-3, 1e-2,1e-1,1,10];
+pararange=[1e-3, 1e-2, 1e-1, 1, 10];
 option.k_s=15; %number of nearest neighbors for the sample similarity graph
 option.k_f=4; %number of nearest neighbors for the label similarity graph
 option.stopObj=1e-2; %convergence threshold
